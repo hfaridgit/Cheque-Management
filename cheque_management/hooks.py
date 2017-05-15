@@ -5,7 +5,7 @@ from . import __version__ as app_version
 app_name = "cheque_management"
 app_title = "Cheque Management"
 app_publisher = "Direction"
-app_description = "For managing receivable and payable cheques"
+app_description = "For managing receivable and payable cheques in local currency only"
 app_icon = "octicon octicon-file-directory"
 app_color = "grey"
 app_email = "info@egdirection.com"

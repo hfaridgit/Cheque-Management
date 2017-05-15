@@ -8,6 +8,11 @@ from frappe.utils import flt, cstr, nowdate, comma_and
 from frappe import throw, msgprint, _
 
 def pe_on_submit(self, method):
+	hh_currency = erpnext.get_company_currency(self.company)
+	if self.paid_from_account_currency != hh_currency:
+		frappe.throw(_("You cannot use foreign currencies with Mode of Payment   Cheque"))
+	if self.paid_to_account_currency != hh_currency:
+		frappe.throw(_("You cannot use foreign currencies with Mode of Payment   Cheque"))
 	if self.mode_of_payment == "Cheque" and self.payment_type == "Receive":
 		notes_acc = frappe.db.get_value("Company", self.company, "receivable_notes_account")
 		if not notes_acc:
@@ -24,7 +29,7 @@ def pe_on_submit(self, method):
 		rc.payment_entry = self.name
 		if self.project:
 			rc.project = self.project
-		rc.currency = erpnext.get_company_currency(self.company)
+		rc.currency = hh_currency
 		rc.amount = self.base_received_amount
 		rc.exchange_rate = 1
 		rc.remarks = self.remarks
@@ -59,7 +64,7 @@ def pe_on_submit(self, method):
 		pc.payment_entry = self.name
 		if self.project:
 			pc.project = self.project
-		pc.currency = erpnext.get_company_currency(self.company)
+		pc.currency = hh_currency
 		pc.amount = self.base_paid_amount
 		pc.exchange_rate = 1
 		pc.remarks = self.remarks

@@ -7,6 +7,18 @@ import frappe, erpnext
 from frappe.utils import flt, cstr, nowdate, comma_and
 from frappe import throw, msgprint, _
 
+def pe_before_submit(self, method):
+	if self.mode_of_payment == "Cheque" and self.payment_type == "Receive":
+		notes_acc = frappe.db.get_value("Company", self.company, "receivable_notes_account")
+		if not notes_acc:
+			frappe.throw(_("Receivable Notes Account not defined in the company setup page"))
+		self.db_set("paid_to", notes_acc)
+	if self.mode_of_payment == "Cheque" and self.payment_type == "Pay":
+		notes_acc = frappe.db.get_value("Company", self.company, "payable_notes_account")
+		if not notes_acc:
+			frappe.throw(_("Payable Notes Account not defined in the company setup page"))
+		self.db_set("paid_from", notes_acc)
+
 def pe_on_submit(self, method):
 	hh_currency = erpnext.get_company_currency(self.company)
 	if self.paid_from_account_currency != hh_currency:

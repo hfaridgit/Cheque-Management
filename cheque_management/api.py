@@ -42,8 +42,8 @@ def pe_on_submit(self, method):
 				"debit_account": notes_acc
 			}
 		])
-		rc.insert()
-		rc.submit()
+		rc.insert(ignore_permissions=True)
+		rc.submit(ignore_permissions=True)
 		message = """<a href="#Form/Receivable Cheques/%s" target="_blank">%s</a>""" % (rc.name, rc.name)
 		msgprint(_("Receivable Cheque {0} created").format(comma_and(message)))
 
@@ -77,8 +77,8 @@ def pe_on_submit(self, method):
 				"debit_account": rec_acc
 			}
 		])
-		pc.insert()
-		pc.submit()
+		pc.insert(ignore_permissions=True
+		pc.submit(ignore_permissions=True)
 		message = """<a href="#Form/Payable Cheques/%s" target="_blank">%s</a>""" % (pc.name, pc.name)
 		msgprint(_("Payable Cheque {0} created").format(comma_and(message)))
 

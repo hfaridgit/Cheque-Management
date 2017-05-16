@@ -108,7 +108,7 @@ class PayableCheques(Document):
 			}
 		])
 		if save or submit:
-			jv.insert()
+			jv.insert(ignore_permissions=True)
 
 			if submit:
 				jv.submit()

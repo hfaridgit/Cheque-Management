@@ -24,7 +24,7 @@ class ReceivableCheques(Document):
 	def validate(self):
 		self.cheque_status = self.get_status()
 
-	def on_update(self):
+	def on_update(self, posting_date):
 		notes_acc = frappe.db.get_value("Company", self.company, "receivable_notes_account")
 		if not notes_acc:
 			frappe.throw(_("Receivable Notes Account not defined in the company setup page"))
@@ -46,15 +46,15 @@ class ReceivableCheques(Document):
 			self.db_set("bank_changed", 0)
 		else:
 			if self.cheque_status == "Cheque Deposited":
-				self.make_journal_entry(uc_acc, notes_acc, self.amount, nowdate(), party_type=None, party=None, cost_center=None, 
+				self.make_journal_entry(uc_acc, notes_acc, self.amount, posting_date, party_type=None, party=None, cost_center=None, 
 						save=True, submit=True)
 			if self.cheque_status == "Cheque Cancelled":
 				self.cancel_payment_entry()
 			if self.cheque_status == "Cheque Collected":
-				self.make_journal_entry(self.deposit_bank, uc_acc, self.amount, nowdate(), party_type=None, party=None, cost_center=None, 
+				self.make_journal_entry(self.deposit_bank, uc_acc, self.amount, posting_date, party_type=None, party=None, cost_center=None, 
 						save=True, submit=True)
 			if self.cheque_status == "Cheque Returned":
-				self.make_journal_entry(notes_acc, uc_acc, self.amount, nowdate(), party_type=None, party=None, cost_center=None, 
+				self.make_journal_entry(notes_acc, uc_acc, self.amount, posting_date, party_type=None, party=None, cost_center=None, 
 						save=True, submit=True)
 			if self.cheque_status == "Cheque Rejected":
 				self.cancel_payment_entry()

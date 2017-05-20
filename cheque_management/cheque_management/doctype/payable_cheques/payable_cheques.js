@@ -22,19 +22,23 @@ frappe.ui.form.on('Payable Cheques', {
 		});
 		if(frm.doc.cheque_status) {
 			if (chq_sts!=frm.doc.cheque_status) {  
+				frm.page.actions_btn_group.hide();
 				frappe.prompt([
 					{'fieldname': 'posting_date', 'fieldtype': 'Date', 'label': 'Posting Date', 'reqd': 1}  
-				],
-				function(values){
-					frappe.msgprint(__("... Please Wait ..."));
-					$c('runserverobj', args={'method':'on_update', 'arg': values.posting_date,'docs':frm.doc},function(r,rt) {
-						frm.refresh();
-					}); 
-					
-				},
-				'Transaction Posting Date',
-				'Confirm'
-				)
+					],
+					function(values){
+						if (values) {
+							frm.doc.posting_date = values.posting_date;
+							show_alert(__("... Please Wait ..."));
+							$c('runserverobj', args={'method':'on_update','docs':frm.doc},function(r,rt) {
+								frm.refresh();
+							}); 
+						}
+						
+					},
+					__("Transaction Posting Date"),
+					__("Confirm")
+				);
 			}
 		}
 	}

@@ -36,7 +36,7 @@ frappe.ui.form.on('Receivable Cheques', {
 					function(values){
 						if (values) {
 							frm.doc.posting_date = values.posting_date;
-							show_alert(__("... Please Wait ..."));
+							show_alert(__("... Please Wait ..."), 300);
 							$c('runserverobj', args={'method':'on_update','docs':frm.doc},function(r,rt) {
 								frm.refresh();
 							}); 

@@ -123,5 +123,7 @@ class PayableCheques(Document):
 		self.submit()
 		message = """<a href="#Form/Journal Entry/%s" target="_blank">%s</a>""" % (jv.name, jv.name)
 		msgprint(_("Journal Entry {0} created").format(comma_and(message)))
-		return jv
+		#message = _("Journal Entry {0} created").format(comma_and(message))
+		
+		return message
 			

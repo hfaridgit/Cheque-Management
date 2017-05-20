@@ -93,7 +93,10 @@ class ReceivableCheques(Document):
 		self.bank_changed = 1
 		self.submit()
 		message = """<a href="#Form/Payment Entry/%s" target="_blank">%s</a>""" % (self.payment_entry, self.payment_entry)
-		msgprint(_("Payment Entry {0} Cancelled").format(comma_and(message)))
+		#msgprint(_("Payment Entry {0} Cancelled").format(comma_and(message)))
+		message = _("Payment Entry {0} Cancelled").format(comma_and(message))
+		
+		return message
 
 			
 	def make_journal_entry(self, account1, account2, amount, posting_date=None, party_type=None, party=None, cost_center=None, 
@@ -142,5 +145,7 @@ class ReceivableCheques(Document):
 		self.submit()
 		message = """<a href="#Form/Journal Entry/%s" target="_blank">%s</a>""" % (jv.name, jv.name)
 		msgprint(_("Journal Entry {0} created").format(comma_and(message)))
-		return jv
+		#message = _("Journal Entry {0} created").format(comma_and(message))
+		
+		return message
 			

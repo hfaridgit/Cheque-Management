@@ -23,22 +23,29 @@ frappe.ui.form.on('Payable Cheques', {
 		if(frm.doc.cheque_status) {
 			if (chq_sts!=frm.doc.cheque_status) {  
 				frm.page.actions_btn_group.hide();
-				frappe.prompt([
-					{'fieldname': 'posting_date', 'fieldtype': 'Date', 'label': 'Posting Date', 'reqd': 1}  
-					],
-					function(values){
-						if (values) {
-							frm.doc.posting_date = values.posting_date;
-							show_alert(__("... Please Wait ..."), 300);
-							$c('runserverobj', args={'method':'on_update','docs':frm.doc},function(r,rt) {
-								frm.refresh();
-							}); 
-						}
-						
-					},
-					__("Transaction Posting Date"),
-					__("Confirm")
-				);
+				if (frm.doc.cheque_status=="Cheque Cancelled") {
+					$c('runserverobj', args={'method':'on_update','docs':frm.doc},function(r,rt) {
+							frm.page.actions_btn_group.show();
+							frm.refresh();
+					}); 
+				}
+				else {
+					frappe.prompt([
+						{'fieldname': 'posting_date', 'fieldtype': 'Date', 'label': 'Posting Date', 'reqd': 1}  
+						],
+						function(values){
+							if (values) {
+								frm.doc.posting_date = values.posting_date;
+								$c('runserverobj', args={'method':'on_update','docs':frm.doc},function(r,rt) {
+										frm.page.actions_btn_group.show();
+										frm.refresh();
+								}); 
+							}
+						},
+						__("Transaction Posting Date"),
+						__("Confirm")
+					);
+				}
 			}
 		}
 	}

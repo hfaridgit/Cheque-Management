@@ -41,13 +41,13 @@ frappe.ui.form.on('Receivable Cheques', {
 						{'fieldname': 'posting_date', 'fieldtype': 'Date', 'label': 'Posting Date', 'reqd': 1}  
 						],
 						function(values){
-							if (values) {
+							//if (values) {
 								frm.doc.posting_date = values.posting_date;
 								$c('runserverobj', args={'method':'on_update','docs':frm.doc},function(r,rt) {
 										frm.page.actions_btn_group.show();
-										frm.refresh();
+										frm.refresh_fields();
 								}); 
-							}
+							//}
 						},
 						__("Transaction Posting Date"),
 						__("Confirm")

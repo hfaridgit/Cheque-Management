@@ -42,22 +42,19 @@ class ReceivableCheques(Document):
 			frappe.throw(_("Default Receivable Account not defined in the company setup page"))
 		elif len(notes_acc) < 4:
 			frappe.throw(_("Default Receivable Account not defined in the company setup page"))
-		if self.bank_changed == 1:
-			self.db_set("bank_changed", 0)
-		else:
-			if self.cheque_status == "Cheque Deposited":
-				self.make_journal_entry(uc_acc, notes_acc, self.amount, self.posting_date, party_type=None, party=None, cost_center=None, 
-						save=True, submit=True)
-			if self.cheque_status == "Cheque Cancelled":
-				self.cancel_payment_entry()
-			if self.cheque_status == "Cheque Collected":
-				self.make_journal_entry(self.deposit_bank, uc_acc, self.amount, self.posting_date, party_type=None, party=None, cost_center=None, 
-						save=True, submit=True)
-			if self.cheque_status == "Cheque Returned":
-				self.make_journal_entry(notes_acc, uc_acc, self.amount, self.posting_date, party_type=None, party=None, cost_center=None, 
-						save=True, submit=True)
-			if self.cheque_status == "Cheque Rejected":
-				self.cancel_payment_entry()
+		if self.cheque_status == "Cheque Deposited":
+			self.make_journal_entry(uc_acc, notes_acc, self.amount, self.posting_date, party_type=None, party=None, cost_center=None, 
+					save=True, submit=True)
+		if self.cheque_status == "Cheque Cancelled":
+			self.cancel_payment_entry()
+		if self.cheque_status == "Cheque Collected":
+			self.make_journal_entry(self.deposit_bank, uc_acc, self.amount, self.posting_date, party_type=None, party=None, cost_center=None, 
+					save=True, submit=True)
+		if self.cheque_status == "Cheque Returned":
+			self.make_journal_entry(notes_acc, uc_acc, self.amount, self.posting_date, party_type=None, party=None, cost_center=None, 
+					save=True, submit=True)
+		if self.cheque_status == "Cheque Rejected":
+			self.cancel_payment_entry()
 			
 	
 	def on_submit(self):
@@ -143,6 +140,7 @@ class ReceivableCheques(Document):
 							})
 		self.bank_changed = 1
 		self.submit()
+		frappe.db.commit()
 		message = """<a href="#Form/Journal Entry/%s" target="_blank">%s</a>""" % (jv.name, jv.name)
 		msgprint(_("Journal Entry {0} created").format(comma_and(message)))
 		#message = _("Journal Entry {0} created").format(comma_and(message))

@@ -24,7 +24,7 @@ class PayableCheques(Document):
 	def validate(self):
 		self.cheque_status = self.get_status()
 
-	def on_update(self, posting_date):
+	def on_update(self):
 		notes_acc = frappe.db.get_value("Company", self.company, "payable_notes_account")
 		if not notes_acc:
 			frappe.throw(_("Payable Notes Account not defined in the company setup page"))
@@ -38,7 +38,7 @@ class PayableCheques(Document):
 			frappe.throw(_("Default Payable Account not defined in the company setup page"))
 
 		if self.cheque_status == "Cheque Deducted":
-			self.make_journal_entry(notes_acc, self.bank, self.amount, posting_date, party_type=None, party=None, cost_center=None, 
+			self.make_journal_entry(notes_acc, self.bank, self.amount, self.posting_date, party_type=None, party=None, cost_center=None, 
 					save=True, submit=True)
 		if self.cheque_status == "Cheque Cancelled":
 			self.cancel_payment_entry()

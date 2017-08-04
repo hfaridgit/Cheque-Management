@@ -29,9 +29,9 @@ def pe_before_submit(self, method):
 
 def pe_on_submit(self, method):
 	hh_currency = erpnext.get_company_currency(self.company)
-	if self.paid_from_account_currency != hh_currency:
+	if self.mode_of_payment == "Cheque" and self.paid_from_account_currency != hh_currency:
 		frappe.throw(_("You cannot use foreign currencies with Mode of Payment   Cheque"))
-	if self.paid_to_account_currency != hh_currency:
+	if self.mode_of_payment == "Cheque" and self.paid_to_account_currency != hh_currency:
 		frappe.throw(_("You cannot use foreign currencies with Mode of Payment   Cheque"))
 	if self.mode_of_payment == "Cheque" and self.payment_type == "Receive":
 		notes_acc = frappe.db.get_value("Company", self.company, "receivable_notes_account")

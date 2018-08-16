@@ -1,0 +1,74 @@
+[
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow State", 
+  "icon": "", 
+  "modified": "2017-05-12 15:51:50.256654", 
+  "name": "Cheque Received", 
+  "style": "Info", 
+  "workflow_state_name": "Cheque Received"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow State", 
+  "icon": "", 
+  "modified": "2017-05-11 00:00:23.242631", 
+  "name": "Cheque Deposited", 
+  "style": "Primary", 
+  "workflow_state_name": "Cheque Deposited"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow State", 
+  "icon": "", 
+  "modified": "2017-05-11 00:01:01.103118", 
+  "name": "Cheque Collected", 
+  "style": "Success", 
+  "workflow_state_name": "Cheque Collected"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow State", 
+  "icon": "", 
+  "modified": "2017-05-11 00:01:44.219297", 
+  "name": "Cheque Returned", 
+  "style": "Warning", 
+  "workflow_state_name": "Cheque Returned"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow State", 
+  "icon": "", 
+  "modified": "2017-05-11 00:02:09.744634", 
+  "name": "Cheque Rejected", 
+  "style": "Danger", 
+  "workflow_state_name": "Cheque Rejected"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow State", 
+  "icon": "", 
+  "modified": "2017-05-11 00:03:19.095081", 
+  "name": "Cheque Cancelled", 
+  "style": "Inverse", 
+  "workflow_state_name": "Cheque Cancelled"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow State", 
+  "icon": "", 
+  "modified": "2017-05-12 16:50:07.929626", 
+  "name": "Cheque Issued", 
+  "style": "Info", 
+  "workflow_state_name": "Cheque Issued"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow State", 
+  "icon": "", 
+  "modified": "2017-05-12 16:50:35.835340", 
+  "name": "Cheque Deducted", 
+  "style": "Success", 
+  "workflow_state_name": "Cheque Deducted"
+ }
+]

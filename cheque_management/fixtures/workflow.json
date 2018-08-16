@@ -1,0 +1,158 @@
+[
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow", 
+  "document_type": "Receivable Cheques", 
+  "is_active": 1, 
+  "modified": "2017-05-12 12:58:30.447324", 
+  "name": "Receivable Cheques Cycle", 
+  "override_status": 0, 
+  "states": [
+   {
+    "allow_edit": "All", 
+    "doc_status": "1", 
+    "message": null, 
+    "state": "Cheque Received", 
+    "update_field": "cheque_status", 
+    "update_value": "Cheque Received"
+   }, 
+   {
+    "allow_edit": "All", 
+    "doc_status": "1", 
+    "message": null, 
+    "state": "Cheque Deposited", 
+    "update_field": "cheque_status", 
+    "update_value": "Cheque Deposited"
+   }, 
+   {
+    "allow_edit": "All", 
+    "doc_status": "1", 
+    "message": null, 
+    "state": "Cheque Collected", 
+    "update_field": "cheque_status", 
+    "update_value": "Cheque Collected"
+   }, 
+   {
+    "allow_edit": "All", 
+    "doc_status": "1", 
+    "message": null, 
+    "state": "Cheque Returned", 
+    "update_field": "cheque_status", 
+    "update_value": "Cheque Returned"
+   }, 
+   {
+    "allow_edit": "All", 
+    "doc_status": "1", 
+    "message": null, 
+    "state": "Cheque Rejected", 
+    "update_field": "cheque_status", 
+    "update_value": "Cheque Rejected"
+   }, 
+   {
+    "allow_edit": "All", 
+    "doc_status": "1", 
+    "message": null, 
+    "state": "Cheque Cancelled", 
+    "update_field": "cheque_status", 
+    "update_value": "Cheque Cancelled"
+   }
+  ], 
+  "transitions": [
+   {
+    "action": "Cheque Deposited", 
+    "allowed": "All", 
+    "next_state": "Cheque Deposited", 
+    "state": "Cheque Received"
+   }, 
+   {
+    "action": "Cheque Cancelled", 
+    "allowed": "All", 
+    "next_state": "Cheque Cancelled", 
+    "state": "Cheque Received"
+   }, 
+   {
+    "action": "Cheque Collected", 
+    "allowed": "All", 
+    "next_state": "Cheque Collected", 
+    "state": "Cheque Deposited"
+   }, 
+   {
+    "action": "Cheque Returned", 
+    "allowed": "All", 
+    "next_state": "Cheque Returned", 
+    "state": "Cheque Deposited"
+   }, 
+   {
+    "action": "Cheque Rejected", 
+    "allowed": "All", 
+    "next_state": "Cheque Rejected", 
+    "state": "Cheque Returned"
+   }, 
+   {
+    "action": "Cheque Deposited", 
+    "allowed": "All", 
+    "next_state": "Cheque Deposited", 
+    "state": "Cheque Returned"
+   }, 
+   {
+    "action": "Cheque Cancelled", 
+    "allowed": "All", 
+    "next_state": "Cheque Cancelled", 
+    "state": "Cheque Returned"
+   }
+  ], 
+  "workflow_name": "Receivable Cheques Cycle", 
+  "workflow_state_field": "cheque_status"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow", 
+  "document_type": "Payable Cheques", 
+  "is_active": 1, 
+  "modified": "2017-05-12 16:54:01.048655", 
+  "name": "Payable Cheques Cycle", 
+  "override_status": 0, 
+  "states": [
+   {
+    "allow_edit": "All", 
+    "doc_status": "1", 
+    "message": null, 
+    "state": "Cheque Issued", 
+    "update_field": "cheque_status", 
+    "update_value": "Cheque Issued"
+   }, 
+   {
+    "allow_edit": "All", 
+    "doc_status": "1", 
+    "message": null, 
+    "state": "Cheque Deducted", 
+    "update_field": "cheque_status", 
+    "update_value": "Cheque Deducted"
+   }, 
+   {
+    "allow_edit": "All", 
+    "doc_status": "1", 
+    "message": null, 
+    "state": "Cheque Cancelled", 
+    "update_field": "cheque_status", 
+    "update_value": "Cheque Cancelled"
+   }
+  ], 
+  "transitions": [
+   {
+    "action": "Cheque Deducted", 
+    "allowed": "All", 
+    "next_state": "Cheque Deducted", 
+    "state": "Cheque Issued"
+   }, 
+   {
+    "action": "Cheque Cancelled", 
+    "allowed": "All", 
+    "next_state": "Cheque Cancelled", 
+    "state": "Cheque Issued"
+   }
+  ], 
+  "workflow_name": "Payable Cheques Cycle", 
+  "workflow_state_field": "cheque_status"
+ }
+]

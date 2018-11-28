@@ -103,10 +103,10 @@ def pe_on_submit(self, method):
 		msgprint(_("Payable Cheque {0} created").format(comma_and(message)))
 
 def pe_on_cancel(self, method):
-	if frappe.db.sql("""select name from `tabReceivable Cheques` where payment_entry=%s 
+	if frappe.db.sql("""select name from `tabReceivable Cheques` where payment_entry=%s and docstatus<>2  
 				and not cheque_status in ("Cheque Cancelled","Cheque Rejected")""" , (self.name)):
 		frappe.throw(_("Cannot Cancel this Payment Entry as it is Linked with Receivable Cheque"))
-	if frappe.db.sql("""select name from `tabPayable Cheques` where payment_entry=%s 
+	if frappe.db.sql("""select name from `tabPayable Cheques` where payment_entry=%s and docstatus<>2  
 				and cheque_status<>'Cheque Cancelled'""" , (self.name)):
 		frappe.throw(_("Cannot Cancel this Payment Entry as it is Linked with Payable Cheque"))
 	return
